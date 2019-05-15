@@ -66,6 +66,13 @@ todoRoutes.route("/update/:id").post(function(req, res) {
   });
 });
 
+todoRoutes.route("/deleteTodo/:id").get(function(req, res) {
+  Todo.findByIdAndRemove({ _id: req.params.id }, function(err, todo) {
+    if (err) res.json(err);
+    else res.json("Todo Deleted Successfully");
+  });
+});
+
 app.use("/todos", todoRoutes);
 
 app.listen(PORT, function() {
